@@ -11,7 +11,7 @@ class App {
     private $_frontController = null;
 
     private function __construct() {
-        Loader::registerNamespaces('Framework', dirname(__FILE__).DIRECTORY_SEPARATOR);
+        Loader::registerNamespace('Framework', dirname(__FILE__).DIRECTORY_SEPARATOR);
         Loader::registerAutoLoad();
         $this->_config = Config::getInstance();
         if ($this->_config->getConfigFolder() == null) {

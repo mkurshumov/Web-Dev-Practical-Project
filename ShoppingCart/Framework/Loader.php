@@ -33,7 +33,7 @@ final class Loader
         }
     }
 
-    public static function registerNamespaces($namespace, $path) {
+    public static function registerNamespace($namespace, $path) {
         $namespace = trim($namespace);
         if (strlen($namespace) > 0) {
             if (!$path) {
@@ -46,8 +46,17 @@ final class Loader
                 throw new \Exception('Namespace directory read error:' . $path);
             }
         } else {
-            //TODO
             throw new \Exception('Invalid namespace:' . $namespace);
+        }
+    }
+
+    public static function registerNamespaces($ar) {
+        if (is_array($ar)) {
+            foreach ($ar as $k => $v) {
+                self::registerNamespace($k, $v);
+            }
+        } else {
+            throw new \Exception('Invalid namespaces');
         }
     }
 
