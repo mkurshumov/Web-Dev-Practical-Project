@@ -12,6 +12,10 @@ class Config
 
     }
 
+    public function getConfigFolder() {
+        return $this->_configFolder;
+    }
+
     public function setConfigFolder($configFolder) {
         if (!$configFolder) {
             throw new \Exception('Empty config folder path:');
@@ -21,6 +25,10 @@ class Config
             //clear old config data
             $this->_configArray = array();
             $this->_configFolder = $_configFolder . DIRECTORY_SEPARATOR;
+            $ns = $this->app['namespaces'];
+            if (is_array($ns)) {
+                Loader::registerNamespaces($ns, $configFolder);
+            }
         } else {
             throw new \Exception('Config directory read error:' . $configFolder);
         }
@@ -34,8 +42,7 @@ class Config
         $_file = realpath($path);
         if ($_file != false && is_file($_file) && is_readable($_file)) {
             $_basename = explode('.php', basename($_file))[0];
-            include $_file;
-            $this->_configArray[$_basename] = $cnf;
+            $this->_configArray[$_basename] = include $_file;
         } else {
             //TODO
             throw new \Exception('Config file read error:' . $path);

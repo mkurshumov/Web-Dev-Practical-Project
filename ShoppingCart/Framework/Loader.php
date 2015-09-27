@@ -33,7 +33,7 @@ final class Loader
         }
     }
 
-    public static function registerNamespace($namespace, $path) {
+    public static function registerNamespaces($namespace, $path) {
         $namespace = trim($namespace);
         if (strlen($namespace) > 0) {
             if (!$path) {
