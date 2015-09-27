@@ -45,7 +45,7 @@ class Config
             $this->_configArray[$_basename] = include $_file;
         } else {
             //TODO
-            throw new \Exception('Config file read error:' . $path);
+            throw new \Exception('Config file read error: ' . $path);
         }
     }
 

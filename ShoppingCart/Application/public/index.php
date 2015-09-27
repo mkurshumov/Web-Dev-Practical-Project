@@ -6,6 +6,7 @@ use Framework\App;
 include '../../Framework/App.php';
 
 $app = App::getInstance();
-echo $app->getConfig()->app;
+
+
 
 $app->run();

@@ -5,6 +5,10 @@ include_once 'Loader.php';
 class App {
     private static $_instance = null;
     private $_config = null;
+    /**
+     * @var FrontController
+     */
+    private $_frontController = null;
 
     private function __construct() {
         Loader::registerNamespaces('Framework', dirname(__FILE__).DIRECTORY_SEPARATOR);
@@ -34,6 +38,8 @@ class App {
         if ($this->_config->getConfigFolder() == null) {
             $this->setConfigFolder('../config');
         }
+        $this->_frontController = FrontController::getInstance();
+        $this->_frontController->dispatch();
     }
 
     /**
