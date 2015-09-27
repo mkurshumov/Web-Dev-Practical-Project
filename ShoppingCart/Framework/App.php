@@ -6,6 +6,7 @@ class App {
     private static $_instance = null;
 
     private function __construct() {
+        Loader::registerNamespace('Framework', dirname(__FILE__).DIRECTORY_SEPARATOR);
         Loader::registerAutoLoad();
     }
 
