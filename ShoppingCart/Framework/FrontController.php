@@ -2,6 +2,8 @@
 namespace Framework;
 
 
+use Framework\Routers\DefaultRouter;
+
 class FrontController
 {
     private static $_instance = null;
@@ -11,7 +13,8 @@ class FrontController
     }
 
     public function dispatch() {
-
+        $a = new DefaultRouter();
+        $a->parse();
     }
 
     /**
