@@ -1,6 +1,6 @@
 <?php
 namespace Framework;
-use Framework\Routers\DefaultRouter;
+use Framework\Routers\IRouter;
 
 class FrontController
 {
@@ -8,14 +8,27 @@ class FrontController
     private $ns = null;
     private $controller = null;
     private $method = null;
+    private $router = null;
 
     private function __construct() {
 
     }
 
+    public function getRouter()
+    {
+        return $this->router;
+    }
+
+    public function setRouter(IRouter $router)
+    {
+        $this->router = $router;
+    }
+
     public function dispatch() {
-        $a = new DefaultRouter();
-        $_uri = $a->getURI();
+        if ($this->router == null) {
+            throw new \Exception('No valid router found', 500);
+        }
+        $_uri = $this->router->getURI();
         $routes = App::getInstance()->getConfig()->routes;
         $_rc = null;
         if (is_array($routes) && count($routes) > 0) {
@@ -64,6 +77,7 @@ class FrontController
                 $this->controller = strtolower($_rc['controllers'][$this->controller]['to']);
             }
         }
+
         $f = $this->ns.'\\'.ucfirst($this->controller);
         $newController = new $f();
         $newController->{$this->method}();
@@ -84,7 +98,6 @@ class FrontController
         }
         return 'index';
     }
-
 
     /**
      * @return FrontController
