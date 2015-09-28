@@ -105,12 +105,12 @@ class App {
         if ($this->_dbConnections[$connection]) {
             return $this->_dbConnections[$connection];
         }
-        $_cnf = $this->getConfig()->database;
-        if (!$_cnf[$connection]) {
+        $_cfg = $this->getConfig()->database;
+        if (!$_cfg[$connection]) {
             throw new \Exception('No valid connection identifier is provided', 500);
         }
-        $dbh = new \PDO($_cnf[$connection]['connection_uri'], $_cnf[$connection]['username'],
-            $_cnf[$connection]['password'], $_cnf[$connection]['pdo_options']);
+        $dbh = new \PDO($_cfg[$connection]['connection_uri'], $_cfg[$connection]['username'],
+            $_cfg[$connection]['password'], $_cfg[$connection]['pdo_options']);
         $this->_dbConnections[$connection] = $dbh;
         return $dbh;
     }

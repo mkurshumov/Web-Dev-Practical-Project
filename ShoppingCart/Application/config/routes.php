@@ -1,14 +1,14 @@
 <?php
 $s = DIRECTORY_SEPARATOR;
 
-$cnf['admin']['namespace'] = 'Controllers'.$s.'Admin1';
+$cfg['admin']['namespace'] = 'Controllers'.$s.'Admin1';
 
-$cnf['administration']['namespace'] = 'Controllers'.$s.'Admin2';
-$cnf['administration']['controllers']['index']['to'] = 'test';
-$cnf['administration']['controllers']['index']['methods']['new'] = '_new';
+$cfg['administration']['namespace'] = 'Controllers'.$s.'Admin2';
+$cfg['administration']['controllers']['index']['to'] = 'test';
+$cfg['administration']['controllers']['index']['methods']['new'] = '_new';
 
-$cnf['administration']['controllers']['new']['to'] = 'create';
+$cfg['administration']['controllers']['new']['to'] = 'create';
 
-$cnf['*']['namespace'] = 'Controllers';
+$cfg['*']['namespace'] = 'Controllers';
 
-return $cnf;
+return $cfg;

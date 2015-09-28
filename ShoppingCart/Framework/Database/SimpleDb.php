@@ -4,8 +4,8 @@ use Framework\App;
 
 class SimpleDb
 {
-    protected $db = 'default';
-    private $connection = null;
+    protected $connection = 'default';
+    private $db = null;
     private $stmt = null;
     private $params = array();
     private $sql;
@@ -14,10 +14,10 @@ class SimpleDb
         if ($connection instanceof \PDO) {
             $this->db = $connection;
         } else if ($connection != null) {
-            $this->db = App::getInstance()->getDbConnection($connection);
+            $this->db = App::getInstance()->getDBConnection($connection);
             $this->connection = $connection;
         } else {
-            $this->db = App::getInstance()->getDbConnection($connection);
+            $this->db = App::getInstance()->getDBConnection($this->connection);
         }
     }
 
