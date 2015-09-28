@@ -1,7 +1,6 @@
 <?php
 namespace Framework;
 
-
 class Config
 {
     private static $_instance = null;

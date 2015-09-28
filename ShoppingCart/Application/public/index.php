@@ -6,5 +6,8 @@ include '../../Framework/App.php';
 
 $app = App::getInstance();
 
+$db = new \Framework\Database\SimpleDb();
+$a = $db->prepare('SELECT * FROM users')->execute()->fetchAllAssoc();
+print_r($a);
 
 $app->run();

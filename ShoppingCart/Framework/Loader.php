@@ -1,7 +1,6 @@
 <?php
 namespace Framework;
 
-
 final class Loader
 {
     private static $namespaces = array();

@@ -80,6 +80,7 @@ class FrontController
 
         $f = $this->ns.'\\'.ucfirst($this->controller);
         $newController = new $f();
+        //
         $newController->{$this->method}();
     }
 
