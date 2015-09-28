@@ -55,28 +55,32 @@ class FrontController
             $this->controller= $this->getDefaultController();
             $this->method=$this->getDefaultMethod();
         }
-        if(is_array($_rc) && $_rc['controllers']){
-            if($_rc['controllers'][$this->controller]['methods'][$this->method]){
-                $this->method=  strtolower($_rc['controllers'][$this->controller]['methods'][$this->method]);
+
+        if(is_array($_rc) && $_rc['controllers']) {
+            if($_rc['controllers'][$this->controller]['methods'][$this->method]) {
+                $this->method = strtolower($_rc['controllers'][$this->controller]['methods'][$this->method]);
             }
-            if(isset($_rc['controllers'][$this->controller]['to'])){
-                $this->controller=  strtolower($_rc['controllers'][$this->controller]['to']);
+            if(isset($_rc['controllers'][$this->controller]['to'])) {
+                $this->controller = strtolower($_rc['controllers'][$this->controller]['to']);
             }
         }
+        $f = $this->ns.'\\'.ucfirst($this->controller);
+        $newController = new $f();
+        $newController->{$this->method}();
     }
 
     public function getDefaultController() {
         $controller = App::getInstance()->getConfig()->app['default_controller'];
         if ($controller) {
-            return $controller;
+            return strtolower($controller);
         }
-        return 'Index';
+        return 'index';
     }
 
     public function getDefaultMethod() {
         $method = App::getInstance()->getConfig()->app['default_method'];
         if ($method) {
-            return $method;
+            return strtolower($method);
         }
         return 'index';
     }
