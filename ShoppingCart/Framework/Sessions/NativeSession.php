@@ -1,5 +1,5 @@
 <?php
-namespace Sessions;
+namespace Framework\Sessions;
 
 class NativeSession implements ISession
 {

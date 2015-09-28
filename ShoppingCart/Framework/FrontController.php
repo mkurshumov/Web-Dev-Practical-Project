@@ -78,10 +78,9 @@ class FrontController
             }
         }
 
-        $f = $this->ns.'\\'.ucfirst($this->controller);
-        $newController = new $f();
-        //
-        $newController->{$this->method}();
+//        $f = $this->ns.'\\'.ucfirst($this->controller);
+//        $newController = new $f();
+//        $newController->{$this->method}();
     }
 
     public function getDefaultController() {

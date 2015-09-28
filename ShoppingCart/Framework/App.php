@@ -2,6 +2,9 @@
 namespace Framework;
 use Framework\Routers\DefaultRouter;
 use Framework\Routers\IRouter;
+use Framework\Sessions\DbSession;
+use Framework\Sessions\ISession;
+use Framework\Sessions\NativeSession;
 
 include_once 'Loader.php';
 
@@ -66,7 +69,33 @@ class App {
         } else {
             $this->_frontController->setRouter(new DefaultRouter());
         }
+
+        $_sess = $this->_config->app['session'];
+        if ($_sess['autostart']) {
+            if ($_sess['type'] == 'native') {
+                $_s = new NativeSession($_sess['name'], $_sess['lifetime'], $_sess['path'], $_sess['domain'], $_sess['secure']);
+            } else if ($_sess['type'] == 'database') {
+                $_s = new DbSession($_sess['dbConnection'],
+                    $_sess['name'], $_sess['dbTable'], $_sess['lifetime'], $_sess['path'], $_sess['domain'], $_sess['secure']);
+            } else {
+                throw new \Exception('No valid session', 500);
+            }
+            $this->setSession($_s);
+        }
+
+
         $this->_frontController->dispatch();
+    }
+
+    public function setSession(ISession $session) {
+        $this->_session = $session;
+    }
+
+    /**
+     * @return ISession
+     */
+    public function getSession() {
+        return $this->_session;
     }
 
     public function getDbConnection($connection = 'default') {

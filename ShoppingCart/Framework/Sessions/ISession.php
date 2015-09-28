@@ -1,6 +1,5 @@
 <?php
-namespace Sessions;
-
+namespace Framework\Sessions;
 
 interface ISession {
     public function getSessionId();
