@@ -42,13 +42,32 @@ class InputData
     public function get($id, $normalize = null, $default = null) {
         if ($this->hasGet($id)) {
             if ($normalize != null) {
-                //Create class for normalizing input data
+                return Utils::normalize($this->_get[$id], $normalize);
             }
             return $this->_get[$id];
         }
         return $default;
     }
 
+    public function post($name, $normalize = null, $default = null) {
+        if ($this->hasPost($name)) {
+            if ($normalize != null) {
+                return Utils::normalize($this->_post[$name], $normalize);
+            }
+            return $this->_post[$name];
+        }
+        return $default;
+    }
+
+    public function cookies($name, $normalize = null, $default = null) {
+        if ($this->hasCookies($name)) {
+            if ($normalize != null) {
+                return Utils::normalize($this->_cookies[$name], $normalize);
+            }
+            return $this->_cookies[$name];
+        }
+        return $default;
+    }
 
     /**
      * @return InputData
