@@ -1,8 +1,8 @@
 <?php
 namespace Framework\Sessions;
-use Framework\Database\SimpleDb;
+use Framework\Database\Database;
 
-class DbSession extends SimpleDb implements ISession
+class DbSession extends Database implements ISession
 {
     private $sessionName;
     private $tableName;

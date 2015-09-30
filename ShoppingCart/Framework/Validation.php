@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kur6u
- * Date: 30.09.2015
- * Time: 22:40
- */
-
 namespace Framework;
-
 
 class Validation
 {
